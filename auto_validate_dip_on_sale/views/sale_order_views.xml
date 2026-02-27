@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_auto_delivery_invoice" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.auto.delivery.invoice</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="auto_process_mode"
+                           widget="radio"
+                           options="{'horizontal': true}"
+                           invisible="not show_auto_process"
+                           readonly="state in ['sale', 'cancel']"/>
+                    <field name="auto_payment_journal_id"
+                           invisible="not show_payment_journal"
+                           required="auto_process_mode == 'full'"
+                           readonly="state in ['sale', 'cancel']"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
