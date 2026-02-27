@@ -4,7 +4,6 @@
 
 One Click Delivery, Invoice, Payment
 ============================
-One Click Delivery, Invoice, Payment
 - Automate Delivery, Invoice, Payment from Sale order
 
 Configuration
