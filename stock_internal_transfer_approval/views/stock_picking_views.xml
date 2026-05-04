@@ -1,0 +1,44 @@
+<odoo>
+    <record id="view_picking_form_approval_simple" model="ir.ui.view">
+        <field name="name">stock.picking.form.approval.simple</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="source_approved" invisible="1"/>
+                <field name="destination_approved" invisible="1"/>
+                <field name="source_manager_id" invisible="1"/>
+                <field name="destination_manager_id" invisible="1"/>
+                <field name="can_approve_source" invisible="1"/>
+                <field name="can_approve_destination" invisible="1"/>
+                <field name="cancel_requested" invisible="1"/>
+                <field name="reopened" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="approve_source"
+                        string="Approve (Source)"
+                        type="object"
+                        class="btn-primary"
+                        invisible="not can_approve_source"/>
+
+                <button name="approve_destination"
+                        string="Approve (Destination)"
+                        type="object"
+                        class="btn-primary"
+                        invisible="not can_approve_destination"/>
+                <button name="cancel_request"
+                        type="object"
+                        string="Cancel Request"
+                        class="btn-danger"
+                        invisible="source_approved == destination_approved or cancel_requested or state == 'done' or (destination_manager_id != uid and source_manager_id != uid)"/>
+
+                <button name="reopen_transfer"
+                        type="object"
+                        string="Reopen"
+                        class="btn-primary"
+                        invisible="not cancel_requested or state == 'done' or source_manager_id != uid"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
